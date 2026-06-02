@@ -1,5 +1,5 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
-import vercel from '@astrojs/vercel'
+import node from '@astrojs/node'  // import vercel from '@astrojs/vercel'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
@@ -29,9 +29,9 @@ export default defineConfig({
   // Deploy to a sub path
   // https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   // base: '/astro-pure/',
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
   // root: './my-project-directory',
-  server: { host: true },
+  server: { host: true, allowedHosts: ['hack.luyi.ink']},
   // https://docs.astro.build/en/guides/prefetch/
   prefetch: {
     // prefetchAll: true,
@@ -40,11 +40,11 @@ export default defineConfig({
 
   // [Adapter]
   // https://docs.astro.build/en/guides/deploy/
-  adapter: vercel({ imageService: true }),
-  output: 'server',
-  // Local (standalone)
-  // adapter: node({ mode: 'standalone' }),
+  // adapter: vercel({ imageService: true }),
   // output: 'server',
+  // Local (standalone)
+  adapter: node({ mode: 'standalone' }),
+  output: 'server',
 
   // [Assets]
   image: {
@@ -129,19 +129,19 @@ export default defineConfig({
   experimental: {
     // Allow compatible editors to support intellisense features for content collection entries
     // https://docs.astro.build/en/reference/experimental-flags/content-intellisense/
-    contentIntellisense: true,
+    // contentIntellisense: true,
     // Enable SVGO optimization for SVG assets
     // https://docs.astro.build/en/reference/experimental-flags/svg-optimization/
-    svgo: true,
+    // svgo: true,
     // Enables pre-rendering your prefetched pages on the client in supported browsers.
     // https://docs.astro.build/en/reference/experimental-flags/client-prerender/
-    clientPrerender: true,
+    // clientPrerender: true,
     // Enables using the new Rust-based compiler for Astro files.
     // https://docs.astro.build/en/reference/experimental-flags/rust-compiler/
-    rustCompiler: false,
+    // rustCompiler: false,
     // https://docs.astro.build/en/reference/experimental-flags/queued-rendering/
-    queuedRendering: {
-      enabled: true
-    }
+    // queuedRendering: {
+    //   enabled: true
+    // }
   }
 })
